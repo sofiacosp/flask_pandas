@@ -2,6 +2,13 @@ import bisect
 import pandas as pd
 import numpy as np
 
+
+def convertir_pickle():
+    for file in glob.glob("*.xlsx"):
+        nombre = file.replace('xlsx', 'pkl')
+        df= pd.read_excel(file)
+        df.to_pickle(nombre)
+        
 # Función para obtener el baremo adecusado según el sexo y la edad del sujeto
 def get_dataframe_p1(baremo, edad):
     if baremo == "General" and edad < 5:
