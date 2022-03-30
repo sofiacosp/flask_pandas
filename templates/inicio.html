@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Flask-Prueba {% endblock %}
+
+{% block body %}
+<!-- Card Header - Dropdown -->
+<div class="container">
+    <h1 class="text-center display-1">Test P1 del BASC</h1>
+
+    <table
+          id="table"
+          data-pagination="true"
+          data-search="true"
+          data-toggle="table"
+          data-show-columns="true"
+          data-locale="es-PY"
+          data-show-columns-toggle-all="true"
+    >
+        <thead>
+            {% for col in columns %}
+            <th data-sortable="true">{{col}}</th>
+
+            {% endfor %}
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for row in data %}
+        <tr>
+            {% for col, row_ in zip(columns, row) %}
+
+                <td>{{row_}}</td>
+
+
+            {% endfor %}
+                <td>
+                    <a href="#" class="btn btn-warning btn-circle" role="button" ><i class="far fa-edit"></i></a>
+                </td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
