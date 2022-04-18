@@ -4,6 +4,7 @@ from dotenv import dotenv_values, load_dotenv
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, ".env"))
 
+
 class DeveloperConfig():
 
     SECRET_KEY= environ.get('SECRET_KEY')
