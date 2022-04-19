@@ -111,23 +111,57 @@ def puntaje_p2(valores, edades, baremos, columna_comparar, columna_recuperar):
 
     for j in range(len(valores)):
 
-        if baremos[j] == "General" and edades[j] < 5:
-            df2 = pd.read_pickle('baremos/P1_Gral_3_4.pkl')
+        if baremos[j] == "General" and edades[j]< 9:
+            df2 = pd.read_pickle('baremos/P2_Gral_6_8.pkl')
 
-        elif baremos[j] == "Mujeres" and edades[j] < 5:
-            df2 = pd.read_pickle('baremos/P1_Muj_3_4.pkl')
+        elif baremos[j] == "Mujeres" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/P2_Muj_6_8.pkl')
 
-        elif baremos[j] == "Varones" and edades[j] < 5:
-            df2 = pd.read_pickle('baremos/P1_Var_3_4.pkl')
+        elif baremos[j] == "Varones" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/P2_Var_6_8.pkl')
 
-        elif baremos[j] == "General" and edades[j] < 7:
-            df2 = pd.read_pickle('baremos/P1_Gral_5_6.pkl')
+        elif baremos[j] == "General" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Gral_8_12.pkl')
 
-        elif baremos[j] == "Varones" and edades[j] < 7:
-            df2 = pd.read_pickle('baremos/P1_Var_5_6.pkl')
+        elif baremos[j] == "Varones" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Var_9_12.pkl')
 
-        elif baremos[j] == "Mujeres" and edades[j] < 7:
-            df2 = pd.read_pickle('baremos/P1_Muj_5_6.pkl')
+        elif baremos[j] == "Mujeres" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Muj_9_12.pkl')
+            
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+"""
+def puntaje_p2(valores, edades, baremos, columna_comparar, columna_recuperar):
+
+    resultado= []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j]< 9:
+            df2 = pd.read_pickle('baremos/P2_Gral_6_8.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/P2_Muj_6_8.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/P2_Var_6_8.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Gral_8_12.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Var_9_12.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/P2_Muj_9_12.pkl')
 
         df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
         df2 = df2.dropna()
@@ -138,6 +172,237 @@ def puntaje_p2(valores, edades, baremos, columna_comparar, columna_recuperar):
         i = bisect.bisect_left(sintomas, valores[j])
         resultado.append(int(pc[i]))
     return resultado
+
+
+def puntaje_p3(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/P3_Gral_12_14.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/P3_Muj_12_14.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/P3_Var_12_14.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/P3_Gral_15_16.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/P3_Var_15_16.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/P3_Muj_15_16.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/P3_Gral_17_18.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/P3_Var_17_18.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/P3_Muj_17_18.pkl')
+
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+def puntaje_s2(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 11:
+            df2 = pd.read_pickle('baremos/S2_Gral_8_10.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 11:
+            df2 = pd.read_pickle('baremos/S2_Muj_8_10.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 11:
+            df2 = pd.read_pickle('baremos/S2_Var_8_10.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/S2_Gral_11_12.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/S2_Var_11_12.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/S2_Muj_11_12.pkl')
+
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+
+def puntaje_s3(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/S3_Gral_12_14.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/S3_Muj_12_14.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/S3_Var_12_14.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/S3_Gral_15_16.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/S3_Var_15_16.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/S3_Muj_15_16.pkl')
+            
+        elif baremos[j] == "General" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/S3_Gral_17_18.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/S3_Var_17_18.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/S3_Muj_17_18.pkl')
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+
+def puntaje_T1(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 5:
+            df2 = pd.read_pickle('baremos/T1_Gral_3_4.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 5:
+            df2 = pd.read_pickle('baremos/T1_Muj_3_4.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 5:
+            df2 = pd.read_pickle('baremos/T1_Var_3_4.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 7:
+            df2 = pd.read_pickle('baremos/T1_Gral_5_6.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 7:
+            df2 = pd.read_pickle('baremos/T1_Var_5_6.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 7:
+            df2 = pd.read_pickle('baremos/T1_Muj_5_6.pkl')
+
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+
+def puntaje_t2(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/T2_Gral_6_8.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/T2_Muj_6_8.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 9:
+            df2 = pd.read_pickle('baremos/T2_Var_6_8.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/T2_Gral_9_12.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/T2_Var_9_12.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 13:
+            df2 = pd.read_pickle('baremos/T2_Muj_9_12.pkl')
+
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+
+
+def puntaje_t3(valores, edades, baremos, columna_comparar, columna_recuperar):
+    resultado = []
+    for j in range(len(valores)):
+
+        if baremos[j] == "General" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/T3_Gral_12_14.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/T3_Muj_12_14.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 15:
+            df2 = pd.read_pickle('baremos/T3_Var_12_14.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/T3_Gral_15_16.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/T3_Var_15_16.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 17:
+            df2 = pd.read_pickle('baremos/T3_Muj_15_16.pkl')
+
+        elif baremos[j] == "General" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/T3_Gral_17_18.pkl')
+
+        elif baremos[j] == "Varones" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/T3_Var_17_18.pkl')
+
+        elif baremos[j] == "Mujeres" and edades[j] < 19:
+            df2 = pd.read_pickle('baremos/T3_Muj_17_18.pkl')
+
+
+        df2 = df2.loc[:, [columna_recuperar, columna_comparar]]
+        df2 = df2.dropna()
+        sintomas = df2.loc[:, columna_comparar].values.tolist()
+        sintomas = sorted(sintomas)
+        pc = df2.loc[:, columna_recuperar].values.tolist()
+        pc = sorted(pc)
+        i = bisect.bisect_left(sintomas, valores[j])
+        resultado.append(int(pc[i]))
+    return resultado
+"""
+
 
 
 def get_value_t(df,bare):
